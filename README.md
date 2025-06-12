@@ -1,36 +1,149 @@
-# Android TPS Task Briefing
-## Introduction
-This project is a starting point in your Android interview journey with DoorDash. At the first Phone screen stage you will start off by adding the initial functionality here and continue adding to it throughout the entire interview process. So keep the progress saved as you move forward.
 
-Here are a few key points to pay attention to in the project:
-1. UI implementation
-    * A starting Activity is added and it displays a `StoreFeedFragment`
-    * `StoreFeedAdapter` is wired up with a `item_store.xml` layout file and just needs some final touches to be made to complete its implementation (see TODOs)
-2. Dagger
-    * We use Dagger for dependency injection (DI) within the app
-    * You are free to modify the DI approach to the one you are most comfortable with
-3. Network
-    * Network stack is covered by Retrofit2
-    * `TPSService` located in the `network` package outlines the backend API we will be hitting during our interview
-    * An instance of `TPSService` is provided by Dagger via `NetworkModule` and can be injected anywhere
-4. `ViewModelFactory` (in case if you will go MVVM route)
-    * `ViewModelFactory` implementation is provided to save time dealing with DI and `ViewModelProvider.Factory` implementation
-    * Usage code snippet is provided in the Javadoc of the `ViewModelFactory.kt` file
+# 📱 Android Kotlin MVVM App
 
-> ### Please Note:
-> This skeleton project is provided for your convenience and you are free to modify it as you see fit as you complete the task during the interview, as long as it does not impact the end goal of the interview - a well architected, clean and working solution.
-> 
-> Just a friendly advise is that if you are comfortable with the generic implementation of this project - then just stick to it, as we will need to move fast in order to complete the task in less then 60 minutes.
+A robust **Kotlin Android app** built with **MVVM architecture**, **Room Database**, and **Jetpack Navigation** using **XML layouts**, **DataBinding**, and **modern best practices**. This project features drag-and-drop & swipe-to-delete in RecyclerView, image loading via Glide, and offline persistence with Room.
 
-## IDE Requirements
-This project runs with Android Studio Flamingo and above
+---
 
-## Grading & Further Expectations
-We are looking for the Architectural consistency, conciseness and cleanliness of the code. Make sure that the code you produce is testable and be ready to write Unit Tests for your code if you will be asked to do so.
+## 🚀 Features
 
-As mentioned above, you will be making additions to this project throughout the interview process going further so make sure you save the progress and have something you can work well with during the follow up stages.
+- 🖼️ **XML-based UI** with `DataBinding`
+- 🔄 **LiveData & MediatorLiveData** for reactive UI updates
+- 🔗 **MVVM Architecture** (ViewModel, Repository, UseCase)
+- 🧩 **Jetpack Navigation Component** with Safe Args
+- 📋 **RecyclerView** using:
+  - `ListAdapter` + `DiffUtil`
+  - Drag-and-drop reordering
+  - Swipe-to-delete
+- 🗃️ **Room Database** for local storage & caching
+- 🧠 **Dagger 2** for Dependency Injection
+- 🖼️ **Glide** for efficient image loading
+- ✅ **Offline-first support**
 
-Good luck and we are looking forward to meet you!
+---
+
+## 🧱 Architecture Overview
+
+```
+
+📁 app/
+│
+├── di/                  # Dagger Modules & Component
+├── model/               # Data models (UI + Room Entities)
+├── repository/          # Repository interfaces and implementations
+├── data/                # DAO, Room DB, and Local data source
+├── ui/
+│   ├── MainActivity     # Host activity
+│   ├── fragments/       # Screens for list and detail views
+│   ├── adapters/        # RecyclerView Adapters
+│   └── viewmodels/      # ViewModels for screen logic
+├── utils/               # Helper functions, constants, extensions
+└── navigation/          # Navigation graph and route arguments
+
+```
+
+---
+
+## 🧩 Core Libraries
+
+| Layer         | Tech                              |
+|---------------|------------------------------------|
+| UI            | XML Views + DataBinding            |
+| Architecture  | MVVM + Repository + UseCase        |
+| Navigation    | Jetpack Navigation (Safe Args)     |
+| DB            | Room + DAO                         |
+| State         | LiveData, MediatorLiveData         |
+| DI            | Dagger 2                           |
+| Images        | Glide                              |
+| Lists         | RecyclerView + ListAdapter         |
+
+---
+
+## 🔁 Data Flow (Clean MVVM)
+
+```
+
+\[Fragment] ⇄ \[ViewModel] ⇄ \[Repository] ⇄ \[Room / API]
+↑         ↓
+LiveData   UiEvent, State
+
+````
+
+- ViewModel exposes LiveData for UI state
+- Room used to cache and persist data locally
+- Repository abstracts data source (local or remote)
+- MediatorLiveData combines multiple data streams
+
+---
+
+---
+
+## 💡 Highlights
+
+### ✅ Room Database
+
+* Entity, DAO, and `RoomDatabase` class
+* CRUD operations for items
+* Fetched data cached in Room
+* UI observes LiveData from Room DAO
+
+### ✅ RecyclerView with ListAdapter
+
+* Efficient list handling using `DiffUtil`
+* Swipe to delete with `ItemTouchHelper`
+* Drag to reorder items and persist new order
+
+### ✅ Navigation with Safe Args
+
+* Type-safe fragment argument passing
+* Back stack management handled automatically
+
+### ✅ Dagger 2 DI
+
+* DI setup for ViewModel, Repository, DAO, and DB
+* Singleton `RoomDatabase` via Dagger module
+
+---
+
+## 🧪 Testing
+
+```bash
+./gradlew test
+```
+
+* [ ] ViewModel unit tests
+* [ ] DAO tests with in-memory Room
+* [ ] UI tests with Espresso
+
+---
+
+## 📸 Screenshots
+
+> *Add screenshots or screen recording of the app*
+
+---
+
+## 📄 License
+
+MIT License. See the [LICENSE](LICENSE) file for more info.
+
+---
+
+## 👨‍💻 Author
+
+**Your Name**
+GitHub: [vikramreddy](https://github.com/mnvikramreddy)
+
+```
+
+---
+
+Would you like:
+- A ready-to-use `RoomModule.kt` with DAO and DB setup for Dagger?
+- An example of `ItemTouchHelper` for drag & swipe with `ListAdapter`?
+
+Let me know, and I’ll generate those snippets too!
+```
 
 ## Environment Setup Tips
 ### Java 11 / 17
